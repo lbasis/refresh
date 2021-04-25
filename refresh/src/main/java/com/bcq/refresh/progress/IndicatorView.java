@@ -224,8 +224,9 @@ public class IndicatorView extends View implements Indicator{
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int width = measureDimension(dp2px(DEFAULT_SIZE), widthMeasureSpec);
-        int height = measureDimension(dp2px(DEFAULT_SIZE), heightMeasureSpec);
+        int defaultSize = getResources().getDimensionPixelSize(R.dimen.re_progress_size);
+        int width = measureDimension(defaultSize, widthMeasureSpec);
+        int height = measureDimension(defaultSize, heightMeasureSpec);
         setMeasuredDimension(width, height);
     }
 

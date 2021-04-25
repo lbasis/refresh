@@ -14,6 +14,7 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,7 +26,6 @@ import com.bcq.refresh.R;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 
 /**
  * @author: BaiCQ
@@ -61,8 +61,8 @@ public class RefreshListView extends ListView implements OnScrollListener, IRefr
     /* 加载全部标识*/
     private boolean isLoadFull;
     private boolean isLoading;// 判断是否正在加载
-    private Style refreshStyle = Style.BallSpinFadeLoader;
-    private Style loadStyle = Style.BallSpinFadeLoader;
+    private Style refreshStyle = RefreshHelper.getStyle();
+    private Style loadStyle = RefreshHelper.getStyle();
 
     public RefreshListView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -81,7 +81,7 @@ public class RefreshListView extends ListView implements OnScrollListener, IRefr
         progress_refresh = headView.findViewById(R.id.default_indicator);
         tipsTextview = headView.findViewById(R.id.head_tipsTextView);
         lastUpdatedTextView = headView.findViewById(R.id.head_lastUpdatedTextView);
-
+        lastUpdatedTextView.setText(formatDate2String());
         measureView(headView);
         headContentHeight = headView.getMeasuredHeight();
         // 隐藏 headview 的高度
@@ -303,11 +303,6 @@ public class RefreshListView extends ListView implements OnScrollListener, IRefr
         child.measure(childWidthSpec, childHeightSpec);
     }
 
-    public void setAdapter(BaseAdapter adapter) {
-        lastUpdatedTextView.setText(formatDate2String());
-        super.setAdapter(adapter);
-    }
-
     private View footer;
     private int firstItemIndex;
     private int scrollStates;
@@ -430,6 +425,6 @@ public class RefreshListView extends ListView implements OnScrollListener, IRefr
         SimpleDateFormat formatPattern = new SimpleDateFormat("HH:mm:ss");
         String resultTimeStr = formatPattern.format(new Date());
         String last = getResources().getString(R.string.re_last_update);
-        return null == resultTimeStr ? last : last+ resultTimeStr;
+        return null == resultTimeStr ? last : last + resultTimeStr;
     }
 }

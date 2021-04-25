@@ -2,21 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@color/re_color_bg"
     android:gravity="bottom">
 
     <RelativeLayout
         android:id="@+id/listview_header_content"
-        android:layout_width="fill_parent"
-        android:layout_height="80dp"
-        android:paddingTop="10dip">
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/re_header_height"
+        android:minHeight="70dp"
+        android:padding="@dimen/re_margin">
 
         <LinearLayout
-            android:id="@+id/listview_header_text"
+            android:id="@+id/ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:minWidth="100dip"
+            android:minHeight="56dp"
+            android:minWidth="100dp"
             android:orientation="vertical">
 
             <TextView
@@ -24,29 +27,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/re_pull_down_refresh"
-                android:textSize="14sp"
-                android:textColor="@color/re_color_default" />
+                android:textColor="@color/re_color_default"
+                android:textSize="@dimen/re_text_size" />
 
-            <LinearLayout
-                android:id="@+id/header_refresh_time_container"
+            <TextView
+                android:id="@+id/last_refresh_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/re_last_update"
-                    android:textColor="@color/re_color_default"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/last_refresh_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/re_color_default"
-                    android:textSize="12sp" />
-            </LinearLayout>
+                android:layout_marginTop="10px"
+                android:text="@string/re_last_update"
+                android:textColor="@color/re_color_default"
+                android:textSize="@dimen/re_text_size_smal" />
         </LinearLayout>
 
         <ImageView
@@ -54,19 +45,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/listview_header_text"
+            android:layout_marginRight="@dimen/re_margin"
+            android:layout_toLeftOf="@+id/ll"
             android:src="@drawable/re_ic_arrow" />
 
         <com.bcq.refresh.xrecycle.SimpleViewSwitcher
             android:id="@+id/listview_header_progressbar"
-            android:layout_width="30dip"
-            android:layout_height="30dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/listview_header_text"
+            android:layout_marginRight="@dimen/re_margin"
+            android:layout_toLeftOf="@+id/ll"
             android:visibility="invisible" />
     </RelativeLayout>
 

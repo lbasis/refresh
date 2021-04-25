@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--    若果想修改默认颜色 自定义这个值即可-->
+    <!--    若果想修改指示器和文字 自定义这个值即可-->
     <color name="re_color_default">#FF02479C</color>
+    <!--    若果想修改背景色 自定义这个值即可-->
+    <color name="re_color_bg">@android:color/transparent</color>
 </resources>

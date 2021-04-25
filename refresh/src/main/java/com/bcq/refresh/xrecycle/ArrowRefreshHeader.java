@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bcq.refresh.R;
+import com.bcq.refresh.RefreshHelper;
 import com.bcq.refresh.progress.IndicatorView;
 import com.bcq.refresh.progress.Style;
 
@@ -29,8 +30,6 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
     private int mState = STATE_NORMAL;
 
     private TextView mHeaderTimeView;
-    private LinearLayout mHeaderRefreshTimeContainer;
-
     private Animation mRotateUpAnim;
     private Animation mRotateDownAnim;
 
@@ -70,18 +69,14 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
     }
 
     public void setRefreshTimeVisible(boolean show) {
-        if (mHeaderRefreshTimeContainer != null)
-            mHeaderRefreshTimeContainer.setVisibility(show ? VISIBLE : GONE);
+        if (mHeaderTimeView != null)
+            mHeaderTimeView.setVisibility(show ? VISIBLE : GONE);
     }
 
     private void initView() {
         // 初始情况，设置下拉刷新view高度为0
         mContainer = (LinearLayout) LayoutInflater.from(getContext()).inflate(
                 R.layout.re_listview_header, null);
-
-        mHeaderRefreshTimeContainer
-                = (LinearLayout) mContainer.findViewById(R.id.header_refresh_time_container);
-
         LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         lp.setMargins(0, 0, 0, 0);
         this.setLayoutParams(lp);
@@ -95,9 +90,6 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
 
         //init the progress view
         mProgressBar = (SimpleViewSwitcher) findViewById(R.id.listview_header_progressbar);
-//        progressView = new IndicatorView(getContext());
-//        progressView.setColor(0xffB5B5B5);
-//        progressView.setStyle(Style.BallSpinFadeLoader);
         createIndicator();
         if (mProgressBar != null)
             mProgressBar.setView(progressView);
@@ -112,6 +104,7 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
         mRotateDownAnim.setFillAfter(true);
 
         mHeaderTimeView = (TextView) findViewById(R.id.last_refresh_time);
+        mHeaderTimeView.setText(formatDate2String());
         measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mMeasuredHeight = getMeasuredHeight();
     }
@@ -130,11 +123,13 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
     private void createIndicator(){
         if (progressView == null){
             progressView = (IndicatorView) LayoutInflater.from(getContext()).inflate(R.layout.re_default_indicator,null,false);
+            progressView.setStyle(RefreshHelper.getStyle());
         }
     }
     public void setArrowImageView(int resid) {
         mArrowImageView.setImageResource(resid);
     }
+
 
     public void setState(int state) {
         if (state == mState) return;
@@ -155,7 +150,7 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
                 mProgressBar.setVisibility(View.INVISIBLE);
             }
         }
-        mHeaderTimeView.setText(formatDate2String());
+//        mHeaderTimeView.setText(formatDate2String());
         switch (state) {
             case STATE_NORMAL:
                 if (mState == STATE_RELEASE_TO_REFRESH) {
@@ -275,7 +270,8 @@ public class ArrowRefreshHeader extends LinearLayout implements BaseRefreshHeade
     public String formatDate2String() {
         SimpleDateFormat formatPattern = new SimpleDateFormat("HH:mm:ss");
         String resultTimeStr = formatPattern.format(new Date());
-        return resultTimeStr;
+        String last = getResources().getString(R.string.re_last_update);
+        return null == resultTimeStr ? last : last + resultTimeStr;
     }
 
 }

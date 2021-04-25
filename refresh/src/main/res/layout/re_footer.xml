@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="horizontal"
-    android:padding="20px">
+    android:background="@color/re_color_bg"
+    android:padding="@dimen/re_margin">
 
     <include layout="@layout/re_default_indicator" />
 
@@ -14,9 +15,9 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="5dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/re_margin"
         android:text="@string/re_loading"
         android:textColor="@color/re_color_default"
-        android:textSize="14sp" />
+        android:textSize="@dimen/re_text_size" />
 
 </LinearLayout>

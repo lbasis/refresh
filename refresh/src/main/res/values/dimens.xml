@@ -1,4 +1,8 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="textandiconmargin">10dp</dimen>
+    <dimen name="re_text_size">14sp</dimen>
+    <dimen name="re_text_size_smal">12sp</dimen>
+    <dimen name="re_margin">20px</dimen>
+    <dimen name="re_progress_size">25dp</dimen>
+    <dimen name="re_header_height">70dp</dimen>
 </resources>

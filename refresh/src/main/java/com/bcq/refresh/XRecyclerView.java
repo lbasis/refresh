@@ -33,8 +33,8 @@ import static com.bcq.refresh.xrecycle.BaseRefreshHeader.STATE_DONE;
 public class XRecyclerView extends RecyclerView implements IRefresh {
     private boolean isLoadingData = false;
     private boolean isNoMore = false;
-    private Style mRefreshProgressStyle = Style.BallSpinFadeLoader;
-    private Style mLoadingMoreProgressStyle = Style.BallSpinFadeLoader;
+    private Style mRefreshProgressStyle = RefreshHelper.getStyle();
+    private Style mLoadingMoreProgressStyle = RefreshHelper.getStyle();
     private ArrayList<View> mHeaderViews = new ArrayList<>();
     private WrapAdapter mWrapAdapter;
     private float mLastY = -1;
@@ -43,7 +43,7 @@ public class XRecyclerView extends RecyclerView implements IRefresh {
     private LoadListener mLoadListener;
     private ArrowRefreshHeader mRefreshHeader;
     private boolean pullRefreshEnabled = true;
-        private boolean loadingMoreEnabled = true;
+    private boolean loadingMoreEnabled = true;
     //下面的ItemViewType是保留值(ReservedItemViewType),如果用户的adapter与它们重复将会强制抛出异常。不过为了简化,我们检测到重复时对用户的提示是ItemViewType必须小于10000
     private static final int TYPE_REFRESH_HEADER = 10000;//设置一个很大的数字,尽可能避免和用户的adapter冲突
     private static final int TYPE_FOOTER = 10001;
@@ -883,7 +883,7 @@ public class XRecyclerView extends RecyclerView implements IRefresh {
 
     @Override
     public void setNoMore(boolean noMore) {
-        Log.e("setNoMore","noMore = "+noMore);
+        Log.e("setNoMore", "noMore = " + noMore);
         isLoadingData = false;
         isNoMore = noMore;
         if (mFootView instanceof LoadingMoreFooter) {
